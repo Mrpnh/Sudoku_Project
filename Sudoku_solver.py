@@ -1,15 +1,7 @@
 
 # Initial Board
 
-board=[[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0]]
+board=[[0 for i in range(9)]for j in range(9)]
 
 # Entering the details that is default filled numbers
 
@@ -32,6 +24,7 @@ def fillDetails(board):
 
 board_len=len(board)
 each_row_len=len(board[0])
+print(board_len)
 
 
 # Printing Board in the specified manner of SUDOKU
@@ -96,25 +89,23 @@ def checkValid(board,num,pos):
 
 # Solving the SUDOKU
 
-def solve(board):
-    # If not find empty then return True which will end the work
-    find = findEmpty(board)
-    if find:
-        row,col=find
-    else:
+def solve(bo):
+    find=findEmpty(bo)
+    if not find:
         return True
+    else:
+        row,col=find
     
     for i in range(1,10):
-        # If valid then put that number else put 0
-        if checkValid(board,i,(row,col)):
-            board[row][col]=i
+        if checkValid(bo,i,(row,col)):
+            bo[row][col]=i
             
-            if solve(board)==True:
-                return True 
+            if solve(board):
+                return True
             else:
-                solve(board)
-        else:
-            board[row][col]=0
+                bo[row][col]=0
+
+    return False
 
 # Main Function
 
